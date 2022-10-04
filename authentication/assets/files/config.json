@@ -1,0 +1,14 @@
+{
+	"baseUrl": "BASE_URL",
+	"reCaptcha": {
+		"url": "URL",
+		"siteKey": "SITE_KEY",
+		"clientID": "CLIENT_ID",
+		"channelName": "Captcha"
+	},
+	"supportedLanguage": [
+		"hy",
+		"ru",
+		"en"
+	]
+}
