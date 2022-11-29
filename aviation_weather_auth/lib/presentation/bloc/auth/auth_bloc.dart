@@ -12,11 +12,11 @@ import '../../../data/repositories/user_auth_api_repository_impl.dart';
 import '../../../data/repositories/user_auth_repository_impl.dart';
 import '../../../utils/utilities.dart';
 
-part 'user_auth_event.dart';
-part 'user_auth_state.dart';
+part 'auth_event.dart';
+part 'auth_state.dart';
 
-class UserAuthBloc extends Bloc<UserAuthEvent, UserAuthState> {
-  UserAuthBloc(this._userAuthRepository, this._userAuthAPIRepository)
+class AuthBloc extends Bloc<AuthEvent, AuthState> {
+  AuthBloc(this._userAuthRepository, this._userAuthAPIRepository)
       : super(const UserAuthInitial()) {
     on<UserSignInWithGoogle>(_onGoogleSignIn);
     on<UserSignOut>(_onSignOut);
@@ -32,7 +32,7 @@ class UserAuthBloc extends Bloc<UserAuthEvent, UserAuthState> {
   Auth? auth;
 
   FutureOr<void> _onEmailSignIn(
-      UserSignInWithEmail event, Emitter<UserAuthState> emit) async {
+      UserSignInWithEmail event, Emitter<AuthState> emit) async {
     try {
       emit(const UserAuthLoading());
       final String? token =
@@ -51,7 +51,7 @@ class UserAuthBloc extends Bloc<UserAuthEvent, UserAuthState> {
   }
 
   FutureOr<void> _onEmailSignUp(
-      UserSignUpWithEmail event, Emitter<UserAuthState> emit) async {
+      UserSignUpWithEmail event, Emitter<AuthState> emit) async {
     try {
       emit(const UserAuthLoading());
       final String? token = await _userAuthAPIRepository.register(
@@ -69,8 +69,7 @@ class UserAuthBloc extends Bloc<UserAuthEvent, UserAuthState> {
     }
   }
 
-  Future<void> _loadUser(
-      Emitter<UserAuthState> emit, String onException) async {
+  Future<void> _loadUser(Emitter<AuthState> emit, String onException) async {
     if (FirebaseAuth.instance.currentUser == null) {
       throw BaseAppException(message: onException);
     }
@@ -78,7 +77,7 @@ class UserAuthBloc extends Bloc<UserAuthEvent, UserAuthState> {
   }
 
   Future<void> _onGoogleSignIn(
-      UserSignInWithGoogle event, Emitter<UserAuthState> emit) async {
+      UserSignInWithGoogle event, Emitter<AuthState> emit) async {
     try {
       emit(const UserAuthLoading());
       await _userAuthRepository.googleSignIn();
@@ -89,8 +88,7 @@ class UserAuthBloc extends Bloc<UserAuthEvent, UserAuthState> {
     }
   }
 
-  Future<void> _onSignOut(
-      UserSignOut event, Emitter<UserAuthState> emit) async {
+  Future<void> _onSignOut(UserSignOut event, Emitter<AuthState> emit) async {
     try {
       emit(const UserAuthLoading());
       await _userAuthRepository.logout(event.auth);
@@ -101,7 +99,7 @@ class UserAuthBloc extends Bloc<UserAuthEvent, UserAuthState> {
   }
 
   Future<void> _onFacebookSignIn(
-      UserSignInWithFacebook event, Emitter<UserAuthState> emit) async {
+      UserSignInWithFacebook event, Emitter<AuthState> emit) async {
     try {
       emit(const UserAuthLoading());
       await _userAuthRepository.facebookSignIn();
@@ -113,7 +111,7 @@ class UserAuthBloc extends Bloc<UserAuthEvent, UserAuthState> {
   }
 
   Future<void> _onAppleSignIn(
-      UserSignInWithApple event, Emitter<UserAuthState> emit) async {
+      UserSignInWithApple event, Emitter<AuthState> emit) async {
     try {
       emit(const UserAuthLoading());
       await _userAuthRepository.appleSignIn();

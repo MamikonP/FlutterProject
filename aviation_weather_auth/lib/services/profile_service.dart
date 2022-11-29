@@ -1,20 +1,19 @@
+import 'dart:io';
+
 import 'package:image_picker/image_picker.dart';
 
-import '../../core/repositories/user_repository.dart';
-import '../../utils/utilities.dart';
-import '../constants.dart';
+import '../data/constants.dart';
+import '../utils/utilities.dart';
 
-class UserRepository implements IUserRepository {
-  @override
-  Future<XFile> pickImage(ImageSource imageSource) async {
+class ProfileService {
+  Future<File> loadImage(ImageSource imageSource) async {
     final XFile? file = await ImagePicker().pickImage(source: imageSource);
     if (file == null) {
       throw NullThrownError();
     }
-    return file;
+    return File(file.path);
   }
 
-  @override
   Future<bool> sendEmail() async {
     final Utilities utilities = Utilities();
     final Uri uri = Uri(

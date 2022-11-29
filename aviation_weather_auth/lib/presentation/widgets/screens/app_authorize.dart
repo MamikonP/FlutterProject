@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../data/constants.dart';
-import '../../bloc/user_auth/user_auth_bloc.dart';
+import '../../bloc/auth/auth_bloc.dart';
 import '../../controllers/user_auth_controllers.dart';
 import '../../shared/app_navigator.dart';
 import '../../shared/app_snackbar.dart';
@@ -17,10 +17,10 @@ class AppAuthorize extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    final UserAuthBloc userAuthBloc = context.read<UserAuthBloc>();
+    final AuthBloc userAuthBloc = context.read<AuthBloc>();
     final AppLocalizations localization = AppLocalizations.of(context)!;
-    return BlocConsumer<UserAuthBloc, UserAuthState>(
-      listener: (BuildContext context, UserAuthState state) {
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener: (BuildContext context, AuthState state) {
         if (state is UserAuthFailed) {
           showSnackBar(context, state.message, SnackbarState.error);
         }
@@ -33,7 +33,7 @@ class AppAuthorize extends StatelessWidget
           AppNavigator.pop(context, true);
         }
       },
-      builder: (BuildContext context, UserAuthState state) {
+      builder: (BuildContext context, AuthState state) {
         return BaseAppLayout(
           imagePath: 'assets/images/profile.pdf',
           children: <Widget>[
@@ -84,9 +84,8 @@ class AppAuthorize extends StatelessWidget
               AppButton(
                   text: localization.loginButton,
                   onPressed: (state is UserAuthLoading)
-                    ? null
-                    : () => _login(userAuthBloc)
-              )
+                      ? null
+                      : () => _login(userAuthBloc))
             else
               AppButton(
                 text: localization.signUpButton,
@@ -114,14 +113,14 @@ class AppAuthorize extends StatelessWidget
     );
   }
 
-  void _login(UserAuthBloc userAuthBloc) => userAuthBloc.add(
+  void _login(AuthBloc userAuthBloc) => userAuthBloc.add(
         UserSignInWithEmail(
           email: emailController.text,
           password: passwordController.text,
         ),
       );
 
-  void _register(UserAuthBloc userAuthBloc) => userAuthBloc.add(
+  void _register(AuthBloc userAuthBloc) => userAuthBloc.add(
         UserSignUpWithEmail(
           email: emailController.text,
           name: nameController.text,

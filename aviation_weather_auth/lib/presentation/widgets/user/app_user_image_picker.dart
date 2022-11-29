@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../utils/utilities.dart';
-import '../../bloc/user/user_bloc.dart';
+import '../../bloc/profile/profile_bloc.dart';
 import '../../shared/app_navigator.dart';
 
 class AppUserImagePicker extends StatelessWidget {
@@ -13,7 +13,7 @@ class AppUserImagePicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final AppLocalizations localization = AppLocalizations.of(context)!;
-    final UserBloc userBloc = context.read<UserBloc>();
+    final ProfileBloc profileBloc = context.read<ProfileBloc>();
     if (Utilities.isAndroidPlatform) {
       return Column(
         mainAxisSize: MainAxisSize.min,
@@ -21,7 +21,7 @@ class AppUserImagePicker extends StatelessWidget {
           GestureDetector(
             onTap: () {
               AppNavigator.pop(context);
-              userBloc.add(const LoadImageFromCamera());
+              profileBloc.add(const LoadImageFromCamera());
             },
             child: ListTile(
               leading: const Icon(Icons.photo_camera_rounded),
@@ -31,7 +31,7 @@ class AppUserImagePicker extends StatelessWidget {
           GestureDetector(
             onTap: () {
               AppNavigator.pop(context);
-              userBloc.add(const LoadImageFromGallery());
+              profileBloc.add(const LoadImageFromGallery());
             },
             child: ListTile(
               leading: const Icon(Icons.photo),
@@ -46,14 +46,14 @@ class AppUserImagePicker extends StatelessWidget {
           CupertinoActionSheetAction(
             onPressed: () {
               AppNavigator.pop(context);
-              userBloc.add(const LoadImageFromCamera());
+              profileBloc.add(const LoadImageFromCamera());
             },
             child: Text(localization.takePhoto),
           ),
           CupertinoActionSheetAction(
             onPressed: () {
               AppNavigator.pop(context);
-              userBloc.add(const LoadImageFromGallery());
+              profileBloc.add(const LoadImageFromGallery());
             },
             child: Text(localization.chooseImageFromGallery),
           ),

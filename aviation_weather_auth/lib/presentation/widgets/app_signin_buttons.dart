@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../utils/utilities.dart';
-import '../bloc/user_auth/user_auth_bloc.dart';
+
+import '../bloc/auth/auth_bloc.dart';
 import '../shared/widgets.dart';
 
 class AppSignInButtons extends StatelessWidget with AppColors, AppGaps {
@@ -20,7 +21,7 @@ class AppSignInButtons extends StatelessWidget with AppColors, AppGaps {
           assetImage: 'assets/images/icons/google.svg',
           color: lightColor,
           onPressed: () {
-            context.read<UserAuthBloc>().add(const UserSignInWithGoogle());
+            context.read<AuthBloc>().add(const UserSignInWithGoogle());
           },
         ),
         AppSiginButton(
@@ -28,7 +29,7 @@ class AppSignInButtons extends StatelessWidget with AppColors, AppGaps {
           assetImage: 'assets/images/icons/facebook.svg',
           color: facebookBackgroundColor,
           onPressed: () {
-            context.read<UserAuthBloc>().add(const UserSignInWithFacebook());
+            context.read<AuthBloc>().add(const UserSignInWithFacebook());
           },
         ),
         if (Utilities.isIOSPlatform)
@@ -37,7 +38,7 @@ class AppSignInButtons extends StatelessWidget with AppColors, AppGaps {
             assetImage: 'assets/images/icons/apple.svg',
             color: darkColor,
             onPressed: () {
-              context.read<UserAuthBloc>().add(const UserSignInWithApple());
+              context.read<AuthBloc>().add(const UserSignInWithApple());
             },
           ),
       ],

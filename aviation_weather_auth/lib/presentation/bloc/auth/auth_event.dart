@@ -1,31 +1,31 @@
-part of 'user_auth_bloc.dart';
+part of 'auth_bloc.dart';
 
-abstract class UserAuthEvent extends Equatable {
-  const UserAuthEvent();
+abstract class AuthEvent extends Equatable {
+  const AuthEvent();
 
   @override
   List<Object> get props => <Object>[];
 }
 
-class UserSignInWithGoogle extends UserAuthEvent {
+class UserSignInWithGoogle extends AuthEvent {
   const UserSignInWithGoogle();
 }
 
-class UserSignOut extends UserAuthEvent {
+class UserSignOut extends AuthEvent {
   const UserSignOut(this.auth);
 
   final Auth? auth;
 }
 
-class UserSignInWithFacebook extends UserAuthEvent {
+class UserSignInWithFacebook extends AuthEvent {
   const UserSignInWithFacebook();
 }
 
-class UserSignInWithApple extends UserAuthEvent {
+class UserSignInWithApple extends AuthEvent {
   const UserSignInWithApple();
 }
 
-class UserSignUpWithEmail extends UserAuthEvent {
+class UserSignUpWithEmail extends AuthEvent {
   const UserSignUpWithEmail({
     required this.email,
     required this.name,
@@ -37,7 +37,7 @@ class UserSignUpWithEmail extends UserAuthEvent {
   final String password;
 }
 
-class UserSignInWithEmail extends UserAuthEvent {
+class UserSignInWithEmail extends AuthEvent {
   const UserSignInWithEmail({
     required this.email,
     required this.password,

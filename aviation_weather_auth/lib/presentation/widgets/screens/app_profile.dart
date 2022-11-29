@@ -5,8 +5,8 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:in_app_review/in_app_review.dart';
 
 import '../../../data/constants.dart';
-import '../../bloc/user/user_bloc.dart';
-import '../../bloc/user_auth/user_auth_bloc.dart';
+import '../../bloc/auth/auth_bloc.dart';
+import '../../bloc/profile/profile_bloc.dart';
 import '../../cubit/navigation_bar_cubit.dart';
 import '../../shared/app_navigator.dart';
 import '../../shared/app_popup.dart';
@@ -37,7 +37,7 @@ class AppProfile extends StatelessWidget with AppColors, AppGaps {
         if (user != null)
           AppProfileItem('favorite.svg', localization.favoriteStations,
               onTap: () {}),
-        BlocConsumer<UserBloc, UserState>(
+        BlocConsumer<ProfileBloc, ProfileState>(
           listener: _onListenFeedback,
           builder: _onBuildFeedback,
         ),
@@ -65,7 +65,7 @@ class AppProfile extends StatelessWidget with AppColors, AppGaps {
             onTap: () => AppNavigator.toNamed(context, '/login'),
           )
         else
-          BlocConsumer<UserAuthBloc, UserAuthState>(
+          BlocConsumer<AuthBloc, AuthState>(
             listener: _onListenLogout,
             builder: _onBuildLogout,
           ),
@@ -73,7 +73,7 @@ class AppProfile extends StatelessWidget with AppColors, AppGaps {
     );
   }
 
-  void _onListenLogout(BuildContext context, UserAuthState state) {
+  void _onListenLogout(BuildContext context, AuthState state) {
     if (state is UserAuthFailed) {
       showSnackBar(
         context,
@@ -95,7 +95,7 @@ class AppProfile extends StatelessWidget with AppColors, AppGaps {
         TextButton(
           onPressed: () {
             AppNavigator.pop(context);
-            final UserAuthBloc userAuthBloc = context.read<UserAuthBloc>();
+            final AuthBloc userAuthBloc = context.read<AuthBloc>();
             userAuthBloc.add(UserSignOut(userAuthBloc.auth));
           },
           child: AppText(localizations.yes),
@@ -110,7 +110,7 @@ class AppProfile extends StatelessWidget with AppColors, AppGaps {
     );
   }
 
-  Widget _onBuildLogout(BuildContext context, UserAuthState state) {
+  Widget _onBuildLogout(BuildContext context, AuthState state) {
     return AppProfileItem(
       'logout.svg',
       AppLocalizations.of(context)!.logout,
@@ -118,7 +118,7 @@ class AppProfile extends StatelessWidget with AppColors, AppGaps {
     );
   }
 
-  void _onListenFeedback(BuildContext context, UserState state) {
+  void _onListenFeedback(BuildContext context, ProfileState state) {
     if (state is EmailSendingCancelled) {
       showSnackBar(
         context,
@@ -128,12 +128,12 @@ class AppProfile extends StatelessWidget with AppColors, AppGaps {
     }
   }
 
-  Widget _onBuildFeedback(BuildContext context, UserState state) {
+  Widget _onBuildFeedback(BuildContext context, ProfileState state) {
     return AppProfileItem(
       'feedback.svg',
       AppLocalizations.of(context)!.feedback,
       onTap: () {
-        context.read<UserBloc>().add(const SendEmail());
+        context.read<ProfileBloc>().add(const SendEmail());
       },
     );
   }

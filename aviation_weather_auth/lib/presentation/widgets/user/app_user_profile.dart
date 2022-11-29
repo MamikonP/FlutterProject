@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../bloc/user/user_bloc.dart';
+import '../../bloc/profile/profile_bloc.dart';
 import '../../shared/widgets.dart';
 import 'app_user_image.dart';
 
@@ -10,8 +10,8 @@ class AppUserProfile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserBloc, UserState>(
-      builder: (BuildContext context, UserState state) {
+    return BlocBuilder<ProfileBloc, ProfileState>(
+      builder: (BuildContext context, ProfileState state) {
         if (state is PickImageCancelled) {
           return AppUserImage();
         } else if (state is PickImageLoading) {
