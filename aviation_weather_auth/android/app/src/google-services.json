@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "910424939779",
+    "firebase_url": "https://aviation-3f1c2.firebaseio.com",
+    "project_id": "aviation-3f1c2",
+    "storage_bucket": "aviation-3f1c2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910424939779:android:c519288fccc0d7e4",
+        "android_client_info": {
+          "package_name": "org.nextstack.aviation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "910424939779-hppf4e7ka2beo4e48sfeikbf861pcuv2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAg2rm7SLbArk_G6BYOD4zoqyA2-Hk84tk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "910424939779-hppf4e7ka2beo4e48sfeikbf861pcuv2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "910424939779-iuckomubsb28ht6hkr1lt312nhfma18u.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.nextstack.aviation",
+                "app_store_id": "1445138836"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
