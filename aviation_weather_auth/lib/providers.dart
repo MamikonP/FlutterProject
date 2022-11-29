@@ -9,7 +9,7 @@ import 'presentation/bloc/settings/settings_bloc.dart';
 import 'presentation/bloc/settings/theme_mode/theme_mode_bloc.dart';
 import 'presentation/cubit/locale/locale_cubit.dart';
 import 'presentation/cubit/navigation_bar_cubit.dart';
-import 'services/profile_service.dart';
+import 'services/gallery_service.dart';
 import 'services/settings_service.dart';
 
 final List<BlocProvider<dynamic>> providers = <BlocProvider<dynamic>>[
@@ -23,7 +23,7 @@ final List<BlocProvider<dynamic>> providers = <BlocProvider<dynamic>>[
     ),
   ),
   BlocProvider<ProfileBloc>(
-    create: (BuildContext context) => ProfileBloc(ProfileService()),
+    create: (BuildContext context) => ProfileBloc(GalleryService()),
   ),
   BlocProvider<NavigationBarCubit>(
     create: (BuildContext context) => NavigationBarCubit(),

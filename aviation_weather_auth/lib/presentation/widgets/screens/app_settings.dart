@@ -7,7 +7,7 @@ import 'package:get_it/get_it.dart';
 
 import '../../../data/data_sources/local/shared_preferences.dart';
 import '../../../data/settings_constants.dart';
-import '../../../utils/utilities.dart';
+import '../../../services/app_service.dart';
 import '../../bloc/settings/settings_bloc.dart';
 import '../../bloc/settings/theme_mode/theme_mode_bloc.dart';
 import '../../shared/widgets.dart';
@@ -66,7 +66,7 @@ class AppSettings extends StatelessWidget with AppColors, AppGaps {
               labels: labels,
               selectedIndex: settingsModel[title] ?? 0,
               hasPremiumAccess:
-                  Utilities().hasPremiumAccess(values.first as Object),
+                  AppService().hasPremiumAccess(values.first as Object),
               selectedLabelIndex: (int index) {
                 _selectedLabelIndex(context, index, settingsModel, title);
               },

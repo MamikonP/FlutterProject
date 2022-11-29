@@ -1,7 +1,6 @@
 import 'package:http/http.dart' as http;
 
 import './exceptions.dart';
-import '../../utils/utilities.dart';
 
 class CheckResponse {
   void checkResponse(http.Response response) {
@@ -11,7 +10,7 @@ class CheckResponse {
 
     switch (response.statusCode) {
       case 400:
-        throw BadRequestException(message: Utilities().getResponseError(response.body));
+        throw BadRequestException(message: response.body);
       case 401:
         throw UnauthorizedException();
       case 403:

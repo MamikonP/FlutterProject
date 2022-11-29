@@ -10,7 +10,6 @@ import '../../../data/constants.dart';
 import '../../../data/data_sources/local/secure_storage.dart';
 import '../../../data/repositories/user_auth_api_repository_impl.dart';
 import '../../../data/repositories/user_auth_repository_impl.dart';
-import '../../../utils/utilities.dart';
 
 part 'auth_event.dart';
 part 'auth_state.dart';
@@ -28,7 +27,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   final UserAuthRepository _userAuthRepository;
   final UserAuthAPIRepository _userAuthAPIRepository;
-  final Utilities _utilities = Utilities();
   Auth? auth;
 
   FutureOr<void> _onEmailSignIn(
@@ -43,8 +41,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await SecureStorage.saveToken(token);
       emit(const UserAuthInitial());
     } on BackendException catch (e) {
-      emit(UserAuthFailed(
-          _utilities.getResponseError(e.message) ?? e.message.toString()));
+      emit(UserAuthFailed(e.message.toString()));
     } catch (e) {
       emit(UserAuthFailed(e.toString()));
     }
@@ -62,8 +59,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await SecureStorage.saveToken(token);
       emit(const UserAuthInitial());
     } on BackendException catch (e) {
-      emit(UserAuthFailed(
-          _utilities.getResponseError(e.message) ?? e.message.toString()));
+      emit(UserAuthFailed(e.message.toString()));
     } catch (e) {
       emit(UserAuthFailed(e.toString()));
     }

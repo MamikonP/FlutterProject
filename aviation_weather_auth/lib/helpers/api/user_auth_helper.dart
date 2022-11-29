@@ -56,7 +56,7 @@ class UserAuthHelper {
 
   Future<OAuthCredential?> appleSignIn() async {
     final String rawNonce = generateNonce();
-    final String nonce = Utilities().sha256ofString(rawNonce);
+    final String nonce = Utilities().convertToSha256(rawNonce);
     final AuthorizationCredentialAppleID credentialAppleID =
         await SignInWithApple.getAppleIDCredential(
             scopes: <AppleIDAuthorizationScopes>[
